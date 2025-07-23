@@ -1,12 +1,13 @@
+use crate::auditoria::log;
 use crate::cuenta::TipoCuenta;
-struct Cliente {
+pub struct Cliente {
     nombre: String,
     saldo: f64,
     cuenta: TipoCuenta,
 }
 
 impl Cliente {
-    fn nueva(nombre: &str, cuenta: TipoCuenta) -> Self {
+    pub fn nueva(nombre: &str, cuenta: TipoCuenta) -> Self {
         Cliente {
             nombre: nombre.to_string(),
             saldo: 0.0,
@@ -14,12 +15,14 @@ impl Cliente {
         }
     }
 
-    fn depositar(&mut self, monto: f64) {
+    pub fn depositar(&mut self, monto: f64) {
         self.saldo += monto;
-        println!("{} depositó {}", self.nombre,  monto);
+        let mensaje = format!("{} depositó {}", self.nombre,  monto);
+        #[cfg(feature = "auditoria")]
+        log(&mensaje);
     }
 
-    fn retirar(&mut self, monto: f64) {
+    pub fn retirar(&mut self, monto: f64) {
         let permitido = match self.cuenta {
             TipoCuenta::Ahorros => self.saldo >= monto,
             TipoCuenta::Corriente => self.saldo - monto >= -500000.0,
@@ -27,15 +30,21 @@ impl Cliente {
 
         if permitido {
             self.saldo -= monto;
-            println!("{} retiró {}",  self.nombre, monto);
+            let mensaje = format!("{} retiró {}",  self.nombre, monto);
+            #[cfg(feature = "auditoria")]
+            log(&mensaje);
         } else {
-            println!("no tiene fondos suficientes");
+            log("no tiene fondos suficientes");
         }
     }
 
-    fn mostrar(&self) {
-        println!("Nombre: {}", self.nombre );
-        println!("Saldo: {}", self.saldo);
-        eprintln!("Cuenta: {:?}", self.cuenta);
+    pub fn mostrar(&self) {
+        #[cfg(feature = "auditoria")]
+        log(&format!("Nombre: {}", self.nombre ));
+        #[cfg(feature = "auditoria")]
+        log( &format!("Saldo: {}", self.saldo));
+        #[cfg(feature = "auditoria")]
+        log( &format!("Cuenta: {:?}", self.cuenta));
     }
+
 }
