@@ -1,1 +1,1 @@
-hola, estamos en clase de programacion en Rust!
+hola, este archivo es para mostrar la propagacion de errores!
