@@ -1,6 +1,14 @@
-trait Resumen {
-    fn resumir(&self) -> String;
-}
+use crate::codigo_clase::mayor;
+use crate::notificacion::notificacion;
+use crate::resumen::Resumen;
+use crate::sumar::add;
+use crate::trait_creacion::{Archivo, Leer};
+
+mod resumen;
+mod notificacion;
+mod sumar;
+mod codigo_clase;
+mod trait_creacion;
 
 struct NuevoArticulo {
     titular: String,
@@ -26,7 +34,14 @@ impl Resumen for Twitter {
     }
 }
 
-fn main() {    
+fn main() {
+    
+    let resultado_mayor =  mayor(&[20.0,100.0, 1.0]);
+    println!("Numero mayor {:?}", resultado_mayor);
+    
+    let archivo = Archivo;
+    let result = archivo.leer().expect("No funciono");
+    eprintln!("archivo uzie: {}", result);
     
     let articulo = NuevoArticulo {
         titular: String::from("Ballenas rascatadas en Japón"),
@@ -43,5 +58,13 @@ fn main() {
     };
     
     println!("Tweet resumir: {}", tweet.resumir());
+    
+    notificacion(&tweet);
+    notificacion(&articulo);
+    
+    
+    let suma = add(5.0, 1.0);
+    println!("{}", suma);
+    
 }
 
