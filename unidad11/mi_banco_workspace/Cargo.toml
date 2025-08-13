@@ -1,0 +1,6 @@
+[workspace]
+resolver = "3"
+members = [
+    "bank_lib",
+    "bank_app"
+]
