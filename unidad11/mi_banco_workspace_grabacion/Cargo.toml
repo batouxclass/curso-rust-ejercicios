@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "bank_lib",
+    "bank_app",
+]
+
