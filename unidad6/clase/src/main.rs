@@ -1,11 +1,23 @@
 use std::collections::HashMap;
 
 fn main() {
+    
+    let mut frutas = Vec::new();
+    frutas.push("Manzana");
+    frutas.push("Pera");
+    
+    for fruta in &frutas {
+        println!("Fruta: {}", fruta);
+    }
+    
+    println!("Total: {} frutas", frutas.len());
+    
+    ////////////////////////////////////////////
+    
     let mut nombres = vec![String::from("Ana"), String::from("Luis")];
     let otra_persona = &nombres[0];
     nombres.push(String::from("Juan"));
-
-    // println!("{:?}", nombres);
+    //println!("{:?}", otra_persona);
 
     /// ejercicio
 
