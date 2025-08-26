@@ -9,7 +9,7 @@ enum TipoCuenta {
 struct Cliente {
     nombre: String,
     saldo: f64,
-    cuenta: TipoCuenta,    
+    cuenta: TipoCuenta,
 }
 
 impl Cliente {
@@ -20,18 +20,18 @@ impl Cliente {
             cuenta,
         }
     }
-    
+
     fn depositar(&mut self, monto: f64) {
         self.saldo += monto;
         println!("{} depositó {}", self.nombre,  monto);
     }
-    
+
     fn retirar(&mut self, monto: f64) {
         let permitido = match self.cuenta {
             TipoCuenta::Ahorros => self.saldo >= monto,
-            TipoCuenta::Corriente => self.saldo - monto >= -500000.0, 
+            TipoCuenta::Corriente => self.saldo - monto >= -500000.0,
         };
-        
+
         if permitido {
             self.saldo -= monto;
             println!("{} retiró {}",  self.nombre, monto);
@@ -39,7 +39,7 @@ impl Cliente {
             println!("no tiene fondos suficientes");
         }
     }
-    
+
     fn mostrar(&self) {
         println!("Nombre: {}", self.nombre );
         println!("Saldo: {}", self.saldo);
@@ -48,12 +48,12 @@ impl Cliente {
 }
 
 fn main() {
-    
+
     let mut juan = Cliente::nueva("JUan",  TipoCuenta::Corriente);
-    
-    juan.depositar(1500000.0);    
+
+    juan.depositar(1500000.0);
     juan.mostrar();
-    
+
     juan.retirar(3000000.0);
     juan.mostrar();
 }
