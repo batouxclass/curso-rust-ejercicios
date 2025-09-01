@@ -45,3 +45,7 @@ unidad2/clase/.idea/clase.iml
 /unidad4/ejercicios/target
 /mini-proyecto/target
 /unidad13/borrar/target
+*.rs
+*.toml
+*.lock
+*.iml
